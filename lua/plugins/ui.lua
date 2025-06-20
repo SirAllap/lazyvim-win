@@ -50,14 +50,12 @@ return {
 			opts.presets.lsp_doc_border = true
 		end,
 	},
-
 	{
 		"rcarriga/nvim-notify",
 		opts = {
 			timeout = 5000,
 		},
 	},
-
 	{
 		"b0o/incline.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons", "lewis6991/gitsigns.nvim" },
@@ -110,7 +108,6 @@ return {
 			})
 		end,
 	},
-
 	{
 		"nvim-lualine/lualine.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
@@ -141,6 +138,9 @@ return {
 	{
 		"folke/snacks.nvim",
 		opts = {
+			scroll = {
+				enabled = false,
+			},
 			dashboard = {
 				preset = {
 					header = [[
@@ -160,7 +160,7 @@ return {
 ⣰⠟⠛⠛⠁⣨⡿⢷⣤⣈⠙⢿⡙⠒⠓⠒⠒⠚⡹⠛⢁⣤⣾⠿⣧⡀⠙⠋⠙⣆
 ⠹⣤⡀⠀⠐⡏⠀⠀⠉⠛⠿⣶⣿⣶⣤⣤⣤⣾⣷⠾⠟⠋⠀⠀⢸⡇⠀⢠⣤⠟
 ⠀⠀⠳⢤⠾⠃⠀⠀⠀⠀⠀⠀⠈⠉⠉⠉⠉⠁⠀⠀⠀⠀⠀⠀⠘⠷⠤⠾⠁⠀
-          ]],
+]],
 				},
 			},
 		},
