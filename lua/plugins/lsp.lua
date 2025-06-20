@@ -32,6 +32,9 @@ return {
 			opts.inlay_hints = { enabled = false }
 
 			opts.servers = vim.tbl_deep_extend("force", opts.servers or {}, {
+				eslint = { -- Add this to disable ESLint
+					autostart = false,
+				},
 				pyright = {
 					settings = {
 						pyright = {
