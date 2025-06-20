@@ -1,1 +1,14 @@
+#lazy-lock.json
+ Lazy
 lazy-lock.json
+
+# Neovim specific
+*.swp
+*.swo
+*~
+.netrwhist
+*.un~
+
+# OS specific
+.DS_Store
+Thumbs.db
