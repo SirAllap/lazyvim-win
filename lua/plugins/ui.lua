@@ -112,10 +112,9 @@ return {
 		"nvim-lualine/lualine.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		opts = function()
-			local theme = require("core.theme")
 			return {
 				options = {
-					theme = theme.name,
+					theme = nil,
 					component_separators = { left = "│", right = "│" },
 					section_separators = { left = "", right = "" },
 					globalstatus = true,

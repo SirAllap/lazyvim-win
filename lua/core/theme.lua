@@ -1,3 +1,3 @@
 return {
-	name = "aurora",
+	name = "fluoromachine",
 }
