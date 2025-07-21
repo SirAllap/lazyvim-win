@@ -3,19 +3,25 @@ return {
 	{
 		"williamboman/mason.nvim",
 		opts = function(_, opts)
-			vim.list_extend(opts.ensure_installed, {
-				"stylua",
-				"selene",
+			-- This list explicitly tells Mason what to install and keep installed.
+			-- All other previously installed tools not in this list will be uninstalled.
+			opts.ensure_installed = {
+				"black",
+				"css-lsp",
+				"html-lsp",
+				"json-lsp",
+				"lua-language-server",
 				"luacheck",
-				"shellcheck",
-				"shfmt",
+				"prettier",
+				"pyright",
+				"ruff", -- Ruff CLI tool, used by ruff-lsp
+				"ruff-lsp", -- LSP for Ruff
+				"selene",
+				"stylua",
 				"tailwindcss-language-server",
 				"typescript-language-server",
-				"css-lsp",
-				"pyright",
-				"black",
-				"ruff-lsp",
-			})
+				"yaml-language-server",
+			}
 		end,
 	},
 
@@ -31,39 +37,39 @@ return {
 		opts = function(_, opts)
 			opts.inlay_hints = { enabled = false }
 
+			-- This table configures the specific LSP servers.
+			-- Only servers listed in opts.ensure_installed above should have configuration here,
+			-- unless you intend for Mason to manage them implicitly.
 			opts.servers = vim.tbl_deep_extend("force", opts.servers or {}, {
-				eslint = { -- Add this to disable ESLint
-					autostart = false,
-				},
+				-- Python LSP servers
 				pyright = {
 					settings = {
 						pyright = {
 							disableOrganizeImports = false,
 							analysis = {
-								typeCheckingMode = "off",
+								typeCheckingMode = "off", -- Or "basic", "strict"
 								useLibraryCodeForTypes = true,
 								diagnosticSeverityOverrides = {
 									reportUnusedImport = "warning",
 									reportMissingImports = "error",
+									reportLineTooLong = "none", -- To ignore E501 if Pyright reports it
+									reportConstantTypo = "none",
 								},
 							},
 						},
 					},
 				},
-				cssls = {},
-				html = {},
-				yamlls = {
+				ruff_lsp = {
 					settings = {
-						yaml = {
-							keyOrdering = false,
+						args = {
+							"--ignore=E501", -- The primary fix for E501 from Ruff
+							-- Or, if you prefer a longer line length:
+							-- "--line-length=120",
 						},
 					},
 				},
-				tailwindcss = {
-					root_dir = function(...)
-						return require("lspconfig.util").root_pattern(".git")(...)
-					end,
-				},
+
+				-- Frontend LSP servers
 				tsserver = {
 					root_dir = function(...)
 						return require("lspconfig.util").root_pattern(".git")(...)
@@ -94,6 +100,25 @@ return {
 						},
 					},
 				},
+				tailwindcss = {
+					root_dir = function(...)
+						return require("lspconfig.util").root_pattern(".git")(...)
+					end,
+				},
+
+				-- General purpose LSP servers
+				cssls = {},
+				html = {},
+				jsonls = {},
+				yamlls = {
+					settings = {
+						yaml = {
+							keyOrdering = false,
+						},
+					},
+				},
+
+				-- Lua LSP server (for your Neovim config)
 				lua_ls = {
 					single_file_support = true,
 					settings = {
