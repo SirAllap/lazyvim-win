@@ -294,13 +294,7 @@ return {
 			},
 		},
 	},
-	{
-		"LazyVim/LazyVim",
-		opts = function(_, opts)
-			local theme = require("core.theme")
-			opts.colorscheme = theme.name
-		end,
-	},
+	
 	{
 		"nvim-telescope/telescope.nvim",
 		opts = {

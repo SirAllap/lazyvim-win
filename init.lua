@@ -8,3 +8,5 @@ end
 vim.print = _G.dd
 
 require("config.lazy")
+
+vim.cmd.colorscheme(require("core.theme").name)
